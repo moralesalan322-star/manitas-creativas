@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Manitas Creativas — Regalos y manualidades personalizadas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <meta name="description" content="Manitas Creativas - Productos y talleres hechos a mano. Regalos personalizados, talleres y tienda online." />
+  <style>
+    :root{
+      --bg: #f7fbff;
+      --card:#ffffff;
+      --blue-pastel:#a7d7f9;
+      --pink-soft:#ffd5e1;
+      --accent:#7fb7f0;
+      --muted:#6b7280;
+      --glass: rgba(255,255,255,0.8);
+      --shadow: 0 8px 24px rgba(10,20,40,0.08);
+      font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,var(--bg),#fff);color:#111;-webkit-font-smoothing:antialiased}
+    header{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;background:linear-gradient(90deg,var(--blue-pastel),var(--pink-soft));border-bottom:1px solid rgba(0,0,0,0.04);position:sticky;top:0;z-index:50}
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo img{height:56px;width:56px;object-fit:contain;border-radius:12px;box-shadow:var(--shadow)}
+    .brand{font-weight:700;font-size:20px}
+    .brand small{display:block;font-size:12px;font-weight:400}
+    nav{display:flex;gap:14px;align-items:center}
+    nav a{color:#063c6b;text-decoration:none;font-weight:600;padding:8px 12px;border-radius:10px}
+    nav a.cta{background:rgba(255,255,255,0.7);box-shadow:var(--shadow)}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;padding:44px 28px;align-items:center}
+    .hero-card{background:var(--card);padding:28px;border-radius:18px;box-shadow:var(--shadow)}
+    .hero h1{font-family:'Pacifico';font-size:44px;margin:0 0 8px}
+    .hero p{margin:0 0 16px;color:var(--muted)}
+    .cta-row{display:flex;gap:12px}
+    .btn{background:var(--accent);border:none;padding:12px 18px;border-radius:12px;color:#fff;font-weight:700;cursor:pointer}
+    .outline{background:transparent;border:2px solid rgba(0,0,0,0.06);padding:10px 16px;border-radius:12px}
+    .features{display:flex;gap:10px;margin-top:14px}
+    .feature{background:linear-gradient(135deg,rgba(255,255,255,0.7),rgba(255,255,255,0.95));padding:10px;border-radius:12px;font-size:14px}
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+    .gallery img{width:100%;height:140px;object-fit:cover;border-radius:12px}
+
+    /* Products */
+    .products{padding:28px}
+    .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:18px}
+    .card{background:var(--card);border-radius:14px;padding:14px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:8px}
+    .card img{width:100%;height:160px;object-fit:cover;border-radius:10px}
+    .product-title{font-weight:700;font-size:18px}
+    .product-desc{font-size:13px;color:var(--muted)}
+    .price-row{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+    .price{font-weight:800}
+    .add{background:linear-gradient(90deg,var(--blue-pastel),var(--accent));border:none;padding:8px 12px;border-radius:10px;cursor:pointer}
+
+    /* Cart */
+    .cart-btn{position:relative}
+    .cart-count{position:absolute;right:-8px;top:-8px;background:#ff6b81;color:#fff;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:12px}
+    .drawer{position:fixed;right:18px;bottom:18px;background:var(--card);width:360px;border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+    .drawer header{padding:12px 16px;border-bottom:1px solid #f1f3f5;display:flex;justify-content:space-between;align-items:center}
+    .drawer .body{max-height:340px;overflow:auto;padding:12px}
+    .drawer .foot{padding:12px;border-top:1px solid #f1f3f5;display:flex;justify-content:space-between;align-items:center}
+    .small{font-size:12px;color:var(--muted)}
+
+    /* Checkout modal */
+    .modal-back{position:fixed;inset:0;background:rgba(2,6,23,0.5);display:flex;align-items:center;justify-content:center}
+    .modal{background:var(--card);border-radius:12px;padding:18px;width:420px;box-shadow:0 20px 40px rgba(2,6,23,0.35)}
+    .form-row{display:flex;gap:8px}
+    input,select,textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #e6e9ef}
+
+    footer{padding:28px;background:linear-gradient(90deg,var(--pink-soft),#fff);margin-top:28px}
+    .footer-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr;}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+      .drawer{width:92%;right:4%;left:4%}
+    }
+    @media(max-width:520px){
+      .gallery{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+    <img src="logomc.png" alt="Logo Manitas Creativas" class="h-12 w-auto rounded-lg">
+      <div>
+        <div class="brand">Manitas Creativas</div>
+        <small>Regalos y manualidades personalizadas</small>
+      </div>
+    </div>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#productos">Productos</a>
+      <a href="#servicios">Talleres</a>
+      <a href="#contacto" class="cta">Contacto</a>
+      <button class="btn cart-btn" id="open-cart">Carrito 🛒 <span class="cart-count" id="cart-count">0</span></button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-card">
+        <h1>Manitas Creativas</h1>
+        <p>Regalos únicos y personalizados hechos a mano. Talleres y productos sostenibles para cada ocasión — crea, personaliza y regala con amor.</p>
+        <div class="cta-row">
+          <button class="btn" onclick="scrollToSection('productos')">Ver productos</button>
+          <button class="outline" onclick="scrollToSection('servicios')">Ver talleres</button>
+        </div>
+        <div class="features">
+          <div class="feature">100% personalizable</div>
+          <div class="feature">Materiales locales</div>
+          <div class="feature">Talleres para todas las edades</div>
+        </div>
+
+        <div class="gallery" style="margin-top:18px">
+        <img src="m1.jpg" alt="Manualidad 1" class="h-12 w-auto rounded-lg">
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=efgh" alt="manualidad-2">
+        <img src="m3.jpg" alt="Manualidad 3" class="h-12 w-auto rounded-lg">
+        </div>
+      </div>
+
+      <div style="background:linear-gradient(180deg,var(--pink-soft),#fff);padding:22px;border-radius:18px">
+        <h3 style="margin:0 0 8px">Nuestra promesa</h3>
+        <p class="small">Planes 100% personalizados y atención cercana. Compra en línea o visita nuestro taller en Francisco I. Madero 81, Concepción Guadalupe.</p>
+
+        <div style="margin-top:12px;display:flex;flex-direction:column;gap:12px">
+          <div style="background:var(--glass);padding:12px;border-radius:12px">
+            <strong>Horario:</strong> Lun-Vie 10:00–19:00 • Sáb 10:00–15:00
+          </div>
+          <div style="background:var(--glass);padding:12px;border-radius:12px">
+            <strong>Contacto:</strong> mancreacontact@gmail.com • 2228279000
+          </div>
+          <div style="background:var(--glass);padding:12px;border-radius:12px">
+            <strong>Métodos de pago:</strong> Transferencia, tarjeta, Oxxo, PayPal (simulado)
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products -->
+    <section class="products" id="productos">
+      <h2 style="margin:0 0 12px;font-size:26px">Productos destacados</h2>
+      <div class="products-grid" id="products-grid">
+        <!-- Product cards injected by JS -->
+      </div>
+    </section>
+
+    <!-- Services / Workshops -->
+    <section style="padding:0 28px 28px" id="servicios">
+      <h2 style="font-size:26px">Talleres y Servicios</h2>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
+        <div class="card" style="min-width:220px;flex:1">
+          <h3 style="margin:0">Taller Mini Regalos</h3>
+          <p class="small">Aprende a crear llaveros, tarjetas y detalles personalizados. 2 horas.</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
+            <span class="price">$350 MXN</span>
+            <button class="add" onclick="openContact()">Reservar</button>
+          </div>
+        </div>
+        <div class="card" style="min-width:220px;flex:1">
+          <h3 style="margin:0">Taller Tazas Pintadas</h3>
+          <p class="small">Pinta y personaliza tu propia taza. Material incluido.</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
+            <span class="price">$420 MXN</span>
+            <button class="add" onclick="openContact()">Reservar</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contacto" style="padding:28px">
+      <h2 style="font-size:22px">Contacto</h2>
+      <div style="display:flex;gap:18px;flex-wrap:wrap;margin-top:12px">
+        <div style="flex:1;min-width:260px;background:var(--card);padding:16px;border-radius:12px;box-shadow:var(--shadow)">
+          <p class="small">Escríbenos para personalizaciones, pedidos grandes o información de talleres.</p>
+          <p><strong>Email:</strong> mancreacontact@gmail.com<br><strong>Tel:</strong> 2228279000<br><strong>Dirección:</strong> Francisco I. Madero 81, Concepción Guadalupe</p>
+          <p><strong>Cuenta para transferencias (simulada):</strong><br>BANCO FAKE • CLABE: 012345678901234567 • Cuenta: 9876543210</p>
+        </div>
+        <div style="flex:1;min-width:260px;background:var(--card);padding:16px;border-radius:12px;box-shadow:var(--shadow)">
+          <form id="contact-form" onsubmit="event.preventDefault();alert('Gracias — recibimos tu mensaje (simulado)')">
+            <label class="small">Nombre</label>
+            <input required placeholder="Tu nombre">
+            <label class="small">Email</label>
+            <input required type="email" placeholder="tu@correo.com">
+            <label class="small">Mensaje</label>
+            <textarea rows="4" placeholder="¿En qué te podemos ayudar?"></textarea>
+            <div style="margin-top:10px;display:flex;gap:10px">
+              <button class="btn" type="submit">Enviar</button>
+              <button class="outline" type="button" onclick="openWhatsApp()">WhatsApp</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <h3>Manitas Creativas</h3>
+        <p class="small">Regalos personalizados — Talleres — Economía naranja.</p>
+      </div>
+      <div>
+        <h4>Enlaces rápidos</h4>
+        <p class="small">Productos • Talleres • Contacto • Políticas</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart Drawer -->
+  <div class="drawer" id="cart-drawer" style="display:none">
+    <header>
+      <strong>Tu carrito</strong>
+      <button onclick="closeCart()">Cerrar ✖</button>
+    </header>
+    <div class="body" id="cart-body">
+      <p class="small">No hay productos en el carrito.</p>
+    </div>
+    <div class="foot">
+      <div>
+        <div class="small">Total:</div>
+        <div id="cart-total" style="font-weight:800">$0 MXN</div>
+      </div>
+      <div>
+        <button class="btn" id="checkout-btn" onclick="openCheckout()">Pagar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Checkout -->
+  <div id="modal-root" style="display:none">
+    <div class="modal-back">
+      <div class="modal">
+        <h3>Pagar — Información</h3>
+        <p class="small">Este es un flujo de pago simulado para propósitos de demostración. No se procesará dinero real.</p>
+        <form id="checkout-form" onsubmit="handlePayment(event)">
+          <label class="small">Nombre completo</label>
+          <input id="pay-name" required placeholder="Nombre en la tarjeta">
+          <div class="form-row" style="margin-top:8px">
+            <div style="flex:1">
+              <label class="small">Número de tarjeta</label>
+              <input id="pay-card" required placeholder="4111 1111 1111 1111">
+            </div>
+            <div style="width:120px">
+              <label class="small">CVV</label>
+              <input id="pay-cvv" required placeholder="123">
+            </div>
+          </div>
+          <div class="form-row" style="margin-top:8px">
+            <div style="flex:1">
+              <label class="small">Vencimiento</label>
+              <input id="pay-exp" required placeholder="MM/AA">
+            </div>
+            <div style="width:120px">
+              <label class="small">Método</label>
+              <select id="pay-method"><option>Tarjeta</option><option>Transferencia</option><option>Oxxo</option></select>
+            </div>
+          </div>
+          <div style="margin-top:12px;display:flex;gap:10px;justify-content:flex-end">
+            <button type="button" class="outline" onclick="closeModal()">Cancelar</button>
+            <button class="btn" type="submit">Confirmar pago</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Products definition (inventados, nombres grandes y descripción breve debajo)
+    const PRODUCTS = [
+      {id:1,name:'Llaverito Sonrisa',desc:'Llaverito acrílico pintado a mano — ideal para detalles.',price:120,img:'ls.jpg'},
+      {id:2,name:'Taza Sonriente',desc:'Taza cerámica personalizada con pintura resistente.',price:220,img:'ts.jpg'},
+      {id:3,name:'Libreta Creativa',desc:'Libreta forrada y decorada, perfecta para notas y regalos.',price:150,img:'lc.jpeg'},
+      {id:4,name:'Cuadro Mini',desc:'Cuadro en miniatura con marco y diseño personalizado.',price:380,img:'cm.jpeg'},
+      {id:5,name:'Velita Aromática',desc:'Vela artesanal con fragancia suave y empaque eco.',price:180,img:'va.jpg'},
+      {id:6,name:'Maceta Diminuta',desc:'Maceta pintada a mano para suculentas pequeñas.',price:140,img:'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=prod6'},
+      {id:7,name:'Set de Postales',desc:'Pack de postales ilustradas — 6 unidades.',price:95,img:'sp.jpg'},
+      {id:8,name:'Pack Corporativo',desc:'Pack personalizado para empresas (desde 10 piezas).',price:1200,img:'https://images.unsplash.com/photo-1526318472351-c75fcf070e5b?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=prod8'}
+    ];
+
+    // Render products
+    const grid = document.getElementById('products-grid');
+    PRODUCTS.forEach(p=>{
+      const div = document.createElement('div'); div.className='card';
+      div.innerHTML = `
+        <img src="${p.img}" alt="${p.name}">
+        <div>
+          <div class="product-title">${p.name}</div>
+          <div class="product-desc">${p.desc}</div>
+        </div>
+        <div style="margin-top:auto;display:flex;align-items:center;justify-content:space-between">
+          <div class="price">$${p.price} MXN</div>
+          <div>
+            <button class="add" onclick="addToCart(${p.id})">Agregar</button>
+          </div>
+        </div>
+      `;
+      grid.appendChild(div);
+    });
+
+    // Cart logic
+    let CART = JSON.parse(localStorage.getItem('mc_cart')||'[]');
+    const cartCountEl = document.getElementById('cart-count');
+    const cartBody = document.getElementById('cart-body');
+    const cartTotalEl = document.getElementById('cart-total');
+
+    function saveCart(){ localStorage.setItem('mc_cart',JSON.stringify(CART)); updateCartUI(); }
+    function updateCartUI(){
+      cartCountEl.textContent = CART.reduce((s,i)=>s+i.qty,0);
+      if(CART.length===0){ cartBody.innerHTML='<p class="small">No hay productos en el carrito.</p>'; cartTotalEl.textContent='$0 MXN'; return; }
+      cartBody.innerHTML='';
+      let total=0;
+      CART.forEach(item=>{
+        const product = PRODUCTS.find(p=>p.id===item.id);
+        const row = document.createElement('div');
+        row.style.display='flex';row.style.justifyContent='space-between';row.style.alignItems='center';row.style.marginBottom='10px';
+        row.innerHTML = `
+          <div style="flex:1">
+            <div style="font-weight:700">${product.name}</div>
+            <div class="small">${product.desc}</div>
+            <div class="small">Qty: <input type='number' min='1' value='${item.qty}' style='width:60px' onchange='changeQty(${product.id},this.value)'></div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-weight:800">$${product.price*item.qty} MXN</div>
+            <button style="margin-top:8px;background:transparent;border:none;color:#ff6b81;cursor:pointer" onclick="removeFromCart(${product.id})">Eliminar</button>
+          </div>
+        `;
+        cartBody.appendChild(row);
+        total += product.price*item.qty;
+      });
+      cartTotalEl.textContent = `$${total} MXN`;
+    }
+
+    function addToCart(id){
+      const existing = CART.find(i=>i.id===id);
+      if(existing) existing.qty++;
+      else CART.push({id,qty:1});
+      saveCart();
+      openCart();
+    }
+    function removeFromCart(id){ CART = CART.filter(i=>i.id!==id); saveCart(); }
+    function changeQty(id,val){ const it = CART.find(i=>i.id===id); if(it){ it.qty = Math.max(1,parseInt(val)||1); saveCart(); } }
+
+    function openCart(){ document.getElementById('cart-drawer').style.display='block'; }
+    function closeCart(){ document.getElementById('cart-drawer').style.display='none'; }
+
+    document.getElementById('open-cart').addEventListener('click',()=>{ openCart(); });
+
+    // Checkout
+    function openCheckout(){
+      if(CART.length===0){ alert('Tu carrito está vacío. Agrega productos antes de pagar.'); return; }
+      document.getElementById('modal-root').style.display='block';
+    }
+    function closeModal(){ document.getElementById('modal-root').style.display='none'; }
+
+    function handlePayment(e){
+      e.preventDefault();
+      // Simple fake validation
+      const name = document.getElementById('pay-name').value.trim();
+      if(!name){ alert('Completa el nombre.'); return; }
+      // simulate processing
+      document.getElementById('checkout-btn')?.setAttribute('disabled','true');
+      setTimeout(()=>{
+        // Clear cart
+        CART = [];
+        saveCart();
+        closeModal();
+        closeCart();
+        alert('Pago simulado exitoso. Gracias por tu compra — este es un demo.');
+      },1000);
+    }
+
+    // Helpers
+    function scrollToSection(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
+    function openWhatsApp(){ window.open('https://wa.me/522228279000?text=Hola%20Manitas%20Creativas%20%F0%9F%8C%90'); }
+    function openContact(){ scrollToSection('contacto'); }
+
+    // Init UI
+    updateCartUI();
+
+  </script>
+</body>
+</html>
